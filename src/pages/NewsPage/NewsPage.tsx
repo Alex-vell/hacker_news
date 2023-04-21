@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { useQuery } from 'react-query';
 import { NavLink, useParams } from 'react-router-dom';
 import { getNewsInfo, NEWS_INFO } from '../../store/api/api';
 import { CommentsList } from '../../components/CommentsList/CommentsList';
 import s from './NewsPage.module.scss';
-import { Box, CircularProgress, IconButton, Typography } from '@mui/material';
+import { Box, CircularProgress, Divider, IconButton, Typography } from '@mui/material';
 import dayjs from 'dayjs';
 import { ArrowBack, Update } from '@mui/icons-material';
 import { PATH } from '../../routes/Routes';
 
-export const NewsPage = () => {
+export const NewsPage = memo(() => {
   const [isUpdate, setIsUpdate] = useState(false);
   const { id } = useParams();
 
@@ -24,18 +24,19 @@ export const NewsPage = () => {
         <CircularProgress sx={{ marginTop: '200px' }} />
       ) : (
         <>
-          <Box sx={{ position: 'absolute', left: '20px' }}>
+          <Box sx={{ position: 'fixed', left: '20px' }}>
             <NavLink to={PATH.HOME}>
               <ArrowBack color="primary" sx={{ fontSize: 32 }} />
             </NavLink>
           </Box>
           <Box>
-            <Typography variant="h3" fontSize={32}>
+            <Typography variant="h3" fontSize={32} marginBottom={2}>
               {news?.title}
             </Typography>
           </Box>
 
-          <Box>
+          <Divider />
+          <Box marginTop={2}>
             <Typography variant="body1" fontSize={18} display="flex" alignItems="center">
               <Typography variant="body1" fontSize={16} marginRight="6px">
                 Author:
@@ -86,11 +87,12 @@ export const NewsPage = () => {
               </IconButton>
             </Box>
           </Box>
-          <Box maxWidth="600px">
+          <Divider />
+          <Box maxWidth="600px" marginTop={2}>
             {news?.kids && <CommentsList commentsItems={news.kids} />}
           </Box>
         </>
       )}
     </div>
   );
-};
+});

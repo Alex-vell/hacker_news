@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, memo, useState } from 'react';
 import s from './CommentListItem.module.scss';
 import { Button } from '@mui/material';
 import { IComment } from '../../models/models';
@@ -9,7 +9,7 @@ interface CommentListItemProps {
   comment: IComment;
 }
 
-export const CommentListItem: FC<CommentListItemProps> = ({ comment }) => {
+export const CommentListItem: FC<CommentListItemProps> = memo(({ comment }) => {
   const { by, kids, time, text } = comment;
 
   const [comments, setComments] = useState<number[] | undefined>(undefined);
@@ -53,4 +53,4 @@ export const CommentListItem: FC<CommentListItemProps> = ({ comment }) => {
       )}
     </>
   );
-};
+});

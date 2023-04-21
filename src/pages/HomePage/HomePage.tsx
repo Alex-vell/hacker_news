@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { useQuery } from 'react-query';
 import { NewsListItem } from '../../components/NewsListItem/NewsListItem';
 import List from '@mui/material/List';
@@ -11,7 +11,7 @@ import {
 } from '../../store/api/api';
 import { Update } from '@mui/icons-material';
 
-export const HomePage = () => {
+export const HomePage = memo(() => {
   const [isUpdate, setIsUpdate] = useState(false);
 
   const { data: stories, isLoading } = useQuery({
@@ -38,7 +38,7 @@ export const HomePage = () => {
         </List>
       )}
 
-      <Box sx={{ position: 'absolute', left: '20px', top: '80px' }}>
+      <Box sx={{ position: 'fixed', left: '20px', top: '80px' }}>
         <IconButton
           value="data-testid"
           color="inherit"
@@ -53,4 +53,4 @@ export const HomePage = () => {
       </Box>
     </Container>
   );
-};
+});

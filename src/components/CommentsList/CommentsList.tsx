@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { useQuery } from 'react-query';
 import { COMMENTS_LIST, getComments } from '../../store/api/api';
 import { CommentListItem } from '../CommentListItem/CommentListItem';
@@ -8,7 +8,7 @@ interface ICommentsList {
   commentsItems: number[];
 }
 
-export const CommentsList: FC<ICommentsList> = ({ commentsItems }) => {
+export const CommentsList: FC<ICommentsList> = memo(({ commentsItems }) => {
   const { data: comments, isLoading } = useQuery([COMMENTS_LIST, commentsItems], () =>
     getComments(commentsItems),
   );
@@ -21,4 +21,4 @@ export const CommentsList: FC<ICommentsList> = ({ commentsItems }) => {
       ))}
     </>
   );
-};
+});
