@@ -1,0 +1,11 @@
+.container {
+  .url {
+    text-decoration: none;
+    font-size: 18px;
+    color: #4a50fd;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
